@@ -1,0 +1,45 @@
+package intership2.dao;
+import java.util.Scanner;
+
+public class UpdateAddress {
+	public static void main(String args[]) throws Exception {
+		
+		Address address=new Address();
+		AddressDAOImpl impl=new AddressDAOImpl();
+		Scanner reader=new Scanner(System.in);
+		String Address,Consignee,Phone,s;
+		System.out.println("请输入要执行的操作：查看地址选1，新增地址选2，删除地址选3");
+		int a=reader.nextInt();
+		if(a==1){
+			impl.getAddress("use shopping select * from [Address]");
+		}
+		else if(a==2){
+			
+			System.out.println("请输入地址");
+			Address=reader.next();
+			address.SetterAddress(Address);
+			
+			System.out.println("请输入收货人");
+			Consignee=reader.next();
+			address.SetterConsignee(Consignee);
+			
+			System.out.println("请输入收货人联系方式");
+			Phone=reader.next();
+			address.SetterPhone(Phone);
+			
+			impl.addAddress(address);
+		}
+			
+		else
+		{
+			System.out.println("请输入需要删除的的地址");
+			s=reader.next();
+			System.out.println("请输入需要删除的收货人姓名");
+			Consignee=reader.next();
+			impl.delAddress("use shopping delete [Address] where Address='"+s+"' And Consignee='"+Consignee+"'");
+			System.out.println("删除成功");
+			
+	
+		}
+	}
+}
