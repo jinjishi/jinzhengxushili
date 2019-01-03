@@ -1,0 +1,18 @@
+package intership2.dao;
+
+import java.util.Scanner;
+//查看详细信息、清空购物车
+public class SelectDetailShoppingcar {
+	public static void main(String args[]) throws Exception {
+		AddDAOImpl impla=new AddDAOImpl();
+		Scanner reader=new Scanner(System.in);
+		Shopping_carDAOImpl impl=new Shopping_carDAOImpl();
+
+		System.out.println("查询购物车信息");
+		impla.getAdd("use shopping select * from [Add]");
+
+		System.out.println("请输入要详细查询的购物车Id");
+		String Shopping_carid=reader.next();
+		impla.getAdd("use shopping select * from [Add] where Shopping_carid ='"+Shopping_carid+"'" );
+	}
+}
