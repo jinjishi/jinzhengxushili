@@ -1,0 +1,44 @@
+package intership2.dao;
+
+import java.util.Scanner;
+
+public class detailAddress {
+	public static void main(String args[]) throws Exception {
+		Scanner reader=new Scanner(System.in);
+		AddressDAOImpl impl=new AddressDAOImpl();
+		String Address,Consignee,Phone,s;
+	System.out.println("请输入需要更改的信息（更改地址请输入1，更改收货人请输入2,更改电话请输入3）");
+	int a=reader.nextInt();
+	if(a==1) {
+		System.out.println("请输入需要更改的的地址");
+		s=reader.next();
+		System.out.println("请输入需要更改的收货人姓名");
+		Consignee=reader.next();
+		System.out.println("请输入更改后的地址");
+		String x=reader.next();
+		impl.updateAddress("use shopping UPDATE [Address] SET Address='"+x+"'Where Address='"+s+"' And Consignee='"+Consignee+"'");
+		System.out.println("修改成功");
+	}
+	if(a==2) {
+		System.out.println("请输入需要更改的的地址");
+		s=reader.next();
+		System.out.println("请输入需要更改的收货人姓名");
+		Consignee=reader.next();
+		System.out.println("请输入更改后的收货人姓名");
+		String x=reader.next();
+		impl.updateAddress("use shopping UPDATE Address SET Consignee='"+x+"'Where Address='"+s+"' And Consignee='"+Consignee+"'");
+		System.out.println("修改成功");
+	}
+	if(a==3) {
+		System.out.println("请输入需要更改的的地址");
+		s=reader.next();
+		System.out.println("请输入需要更改的收货人姓名");
+		Consignee=reader.next();
+		System.out.println("请输入更改后的联系方式");
+		String x=reader.next();
+		impl.updateAddress("use shopping UPDATE Address SET Phone='"+x+"'Where Address='"+s+"' And Consignee='"+Consignee+"'");
+		System.out.println("修改成功");
+	}
+	
+	}
+}
