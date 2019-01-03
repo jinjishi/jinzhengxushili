@@ -1,0 +1,97 @@
+package intership2.dao;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Scanner;
+public class UpdateOrder {
+	//订单的添加、查询、删除
+	public static void main(String args[]) throws Exception {
+		
+		OrderDAOImpl impla=new OrderDAOImpl();
+		ProductDAOImpl implb=new ProductDAOImpl();
+		PODAOImpl implc=new PODAOImpl();
+		UserDaoImpl impld=new UserDaoImpl();
+		
+		Order order=new Order();
+		PO po=new PO();
+		String Orderid,Date,Condition, Nickname,Address,Consignee;
+		String Productid,Color;
+		int Size;
+		Scanner reader=new Scanner(System.in);
+		Date now = new Date(); 
+		
+		System.out.println("请输入要执行的操作：查看订单选1，新增订单选2，删除订单选3");
+		int a=reader.nextInt();
+		
+		if(a==1){
+			//查看订单
+			System.out.println("订单信息");
+			impla.getOrder("use shopping select * from [Order]");
+			System.out.println("是否要查看订单的详细信息(是请输入1，否请输入2)");
+			int x=reader.nextInt();
+			if(x==1) {
+				System.out.println("请输入要查看的订单ID");
+				String ID=reader.next();
+				implc.getPO("use shopping select * from [PO] where Orderid='"+ID+"'");
+			}
+		}
+		
+		else if(a==2){
+			//添加订单信息
+			System.out.println("请输入订单ID");
+			Orderid=reader.next();
+			order.SetterOrderid(Orderid);
+			
+			System.out.println("请输入时间");
+			Date=reader.next();
+			order.SetterDate(Date);
+			
+			Condition="待发货";
+			order.SetterCondition(Condition);
+			
+			System.out.println("请输入昵称");
+			Nickname=reader.next();
+			order.SetterNickname(Nickname);
+			
+			System.out.println("请输入地址");
+			Address=reader.next();
+			order.SetterAddress(Address);
+			
+			System.out.println("请输入收货人");
+			Consignee=reader.next();
+			order.SetterConsignee(Consignee);
+			//添加订单
+			impla.addOrder(order);
+			//向po表添加信息
+			
+			System.out.println("请输入购买商品ID");
+			Productid=reader.next();
+			po.SetterProductid(Productid);
+			
+			System.out.println("请输入购买商品颜色");
+			Color=reader.next();
+			po.SetterColor(Color);
+			
+			System.out.println("请输入购买商品大小");
+			Size=reader.nextInt();
+			po.SetterSize(Size);
+			po.SetterOrderid(Orderid);
+			implc.addPO(po);
+			
+			implb.updateProduct("use shopping update [Product] set Sale_volume=Sale_volume+1 where Productid='"+Productid+"' And Color='"+Color+"' And Size='"+Size+"'");
+			//销量+1
+			implb.updateProduct("use shopping update [Product] set Iventory =Iventory-1 where Productid='"+Productid+"' And Color='"+Color+"' And Size='"+Size+"'");
+			System.out.println("添加订单成功");
+			
+		}
+		else
+		{
+			System.out.println("请输入需要删除的订单号");
+			Orderid=reader.next();
+			implc.delPO("use shopping delete [PO] where Orderid='"+Orderid+"'");
+			impla.delOrder("use shopping delete [Order] where Orderid='"+Orderid+"'" );
+			System.out.println("删除订单成功");
+		}
+	}
+	
+}
