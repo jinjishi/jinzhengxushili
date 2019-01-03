@@ -1,0 +1,34 @@
+package intership2.dao;
+import java.util.ArrayList;
+import java.util.Scanner;
+public class SelectShoppingcar {
+	public static void main(String args[]) throws Exception {
+		
+		Shopping_car car=new Shopping_car();
+		Shopping_carDAOImpl impl=new Shopping_carDAOImpl();
+		ProductDAOImpl implp=new ProductDAOImpl();
+		AddDAOImpl impla=new AddDAOImpl();
+		Add add=new Add();
+		String carid=null;
+		
+		Scanner reader=new Scanner(System.in);
+
+		System.out.println("全部商品");
+		implp.getProduct("use shopping select * from Product");
+
+		System.out.println("请输入要加入购物车的产品ID");
+		String p=reader.nextLine();
+		
+		
+		System.out.println("请输入要加入的购物车ID");
+		carid=reader.next();
+		
+		implp.getProduct("use shopping select * from Product where Productid='"+p+"'");
+		add.SetterProductid(p);
+		add.SetterShopping_carid(carid);
+		add.SetterSize(implp.product.Size);
+		add.SetterColor(implp.product.Color);
+		impla.addAdd(add);
+		System.out.println("添加购物车成功");
+	}
+}
