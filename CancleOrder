@@ -1,0 +1,20 @@
+package intership2.dao;
+
+import java.util.Scanner;
+
+public class DelectOrder {
+	public static void main(String args[]) throws Exception {
+		String Orderid,s;
+		Scanner reader=new Scanner(System.in);
+		OrderDAOImpl impla=new OrderDAOImpl();
+		ProductDAOImpl implb=new ProductDAOImpl();
+		PODAOImpl implc=new PODAOImpl();
+		System.out.println("请输入需要取消的订单号");
+		Orderid=reader.next();
+		s="已取消";
+		impla.updateOrder("use shopping update [Order] set Condition ='"+s+"'where Orderid='"+Orderid+"'");
+		implb.updateProduct("use shopping update [Product] set Sale_volume=Sale_volume-1 where Productid='"+implc.po.Productid+"'And Color='"+implc.po.Color+"' And Size='"+implc.po.Size+"'");//销量－1
+		implb.updateProduct("use shopping update [Product] set Iventory =Iventory+1 where Productid='"+implc.po.Productid+"' And Color='"+implc.po.Color+"' And Size='"+implc.po.Size+"'");
+		System.out.println("订单已取消");
+	}
+}
