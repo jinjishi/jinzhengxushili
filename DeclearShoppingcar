@@ -1,0 +1,22 @@
+package intership2.dao;
+
+import java.util.Scanner;
+
+public class DelectShoppingcar {
+	public static void main(String args[]) throws Exception {
+		AddDAOImpl impla=new AddDAOImpl();
+		Scanner reader=new Scanner(System.in);
+		Shopping_carDAOImpl impl=new Shopping_carDAOImpl();
+		System.out.println("是否清空购物车(删除请输入1，不删除请输入2)");
+		
+		int x=reader.nextInt();
+		if(x==1) {
+			System.out.println("请输入要清空的购物车id");
+			String id=reader.next();
+			impl.delShopping_car("use shopping delete [Add] where Shopping_carid='"+id+"'" );
+			System.out.println("购物车已清空");
+	}
+	return;
+	}
+	
+}
