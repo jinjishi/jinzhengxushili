@@ -1,0 +1,28 @@
+package intership2.dao;
+
+import java.util.Scanner;
+//修改订单地址
+public class updateOrderAddress {
+
+	public static void main(String args[]) throws Exception {
+		String Orderid;
+		OrderDAOImpl impl=new OrderDAOImpl();
+		Scanner reader=new Scanner(System.in);
+		System.out.println("请输入需要更改的订单ID");
+		Orderid=reader.nextLine();
+		System.out.println("请输入需要更改的信息（更改地址请输入1，更改收货人请输入2）");
+		int a=reader.nextInt();
+		if(a==1) {
+			System.out.println("请输入更改后的地址");
+			String x=reader.next();
+			impl.updateOrder("use shopping UPDATE [Order] SET Address='"+x+"'Where Orderid='"+Orderid+"'");
+			System.out.println("修改成功");
+		}
+		if(a==2) {
+			System.out.println("请输入更改后的收货人姓名");
+			String x=reader.next();
+			impl.updateOrder("use shopping UPDATE  [Order] SET Consignee='"+x+"'Where Orderid='"+Orderid+"'");
+			System.out.println("修改成功");
+		}
+	}	
+}
