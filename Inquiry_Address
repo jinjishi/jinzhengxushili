@@ -1,0 +1,22 @@
+package intership2.dao;
+import java.lang.Exception;
+import java.util.ArrayList;
+import java.util.Scanner;
+public class Inquiry_Address{
+	public static void main(String[] args) throws Exception {
+		Scanner in=new Scanner(System.in);
+		System.out.println("欢迎来到京东购物");
+		
+		AUDAOImpl impl2=new AUDAOImpl();
+		
+		System.out.println("请输入你的昵称：");
+		String str=in.next();
+		@SuppressWarnings("unused")
+    	ArrayList<AU> list1=new ArrayList<AU>();
+		System.out.println("Address\tConsigeeNickname");
+		list1=impl2.getAU("use shopping select * from AU where Nickname= '"+str+"'");
+		in.close();
+		System.out.println("欢迎再次光临");
+	}
+
+}
